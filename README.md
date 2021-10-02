@@ -17,5 +17,19 @@ An optional power module mounted in the base of a qbNODE to provide 6-12VDC to e
 ### qbCOMMS (Coming soon)
 An optional communications module mounted to the top of a qbNODE to interface with the RS485 bus via Serial using an XBee, or other wireless, module.
 
+## Component compatibility
+component | compatible with
+------------ | -------------
+qbNODE RevA | qbEDGE RevA, qbPOWER RevA, qbCOMMS RevA
+qbEDGE RevA | qbPOWER RevA, qbCOMMS RevA
+
+## Serial number naming convention
+project | component name | revision letter | major.minor.patch numbering (optional) | last revision date
+------------ | ------------- | ------------- | ------------- |  -------------
+qbEVK | EDGE | A | 1.0.0 | 20211003
+
+***Example:***
+```qbEVK-EDGE-A-1.0.0-20211003```
+
 ## qbNETWORK
 A network comprising of multiple qbNODEs connected together on the same RS485 bus.
