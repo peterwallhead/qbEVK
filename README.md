@@ -6,6 +6,8 @@ A modular robotics experiment utilising affordable off-the-shelf components and 
 ### qbNODE
 A 3D printed frame measuring approximately 65x65x60mm holding 4 qbEDGE PCBs, a power supply module and a communications module.
 
+![Exported CAD of RevA qbNODE, excluding power and comms modules](https://github.com/peterwallhead/qbEVK/blob/master/components/qbNODE/RevA/cad/exports/qbNODE-RevA.png)
+
 ### qbEDGE (RevA in development)
 A PCB with its own dedicated ESP32 and power regulation circuit (max power input of 15VDC) which shares a common power rail and RS485 bus with all the edges in the same node. Each edge can be linked to another node using a 5-way spring connector (GND, RS485A, RS485B, I/O, I/O).
 
