@@ -1,27 +1,29 @@
 $PCB_THICKNESS = 1.2;
+$PCB_COLOUR = "white";
+$FRAME_COLOUR = "lightgreen";
 $CONTACTS = 5;
 
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
-    translate([-$thickness_padding/2,-25-$y_padding,-25]) cube([$pcb_thickness+$thickness_padding,50+($y_padding*2),50]);
+    translate([-$thickness_padding/2,-25-$y_padding,-25]) color($FRAME_COLOUR) cube([$pcb_thickness+$thickness_padding,50+($y_padding*2),50]);
 }
 
 module pcb($pcb_thickness) {
-    color("white") translate([0,-25,-25]) cube([$pcb_thickness,50,50]);
+   translate([0,-25,-25]) color($PCB_COLOUR) cube([$pcb_thickness,50,50]);
 }
 
 
 module cubeCap() {
     difference() {
-        translate([0,0,0]) color("lightgreen") linear_extrude(height=10, twist=0)
+        translate([0,0,0]) color($FRAME_COLOUR) linear_extrude(height=10, twist=0)
         polygon(points=[[-30,32.5],[30,32.5],[32.5,30],[32.5,20],[32.5,-20],[32.5,-30],[30,-32.5],[-30,-32.5],[-32.5,-30],[-32.5,-20],[-32.5,20],[-32.5,30]]);
         
         union() {
-            translate([0,0,-1]) linear_extrude(height=12, twist=0)
+            translate([0,0,-1]) color($FRAME_COLOUR) linear_extrude(height=12, twist=0)
             polygon(points=[[-20,25],[20,25],[25,20],[25,-20],[20,-25],[-20,-25],[-25,-20],[-25,20]]);
             for (i=[0, 90, 180, 270]) rotate(i) {
                 translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,1);
-                translate([-26,26,-1]) cylinder(d=3.3,h=12,$fn=36);
-                translate([-26,26,-1]) cylinder(d=6,h=3,$fn=36);
+                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=3.3,h=12,$fn=36);
+                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=6,h=3,$fn=36);
             }      
         }    
     }
@@ -37,11 +39,11 @@ module qbNODE() {
 module cubeStandoffs() {
     difference() {
         for (i=[0, 90, 180, 270]) rotate(i) {
-            translate([-26.5,-26.5,10]) color("lightgreen") cylinder(d=10,h=40,$fn=36);       
+            translate([-26.5,-26.5,10]) color($FRAME_COLOUR) cylinder(d=10,h=40,$fn=36);       
         }
         for (i=[0, 90, 180, 270]) rotate(i) {
             translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,0.5);
-            translate([-26,26,9]) cylinder(d=3,h=42,$fn=36);
+            translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=3,h=42,$fn=36);
         }
     }
 }
