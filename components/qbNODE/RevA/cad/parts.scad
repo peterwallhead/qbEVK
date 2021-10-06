@@ -3,6 +3,13 @@ $PCB_COLOUR = "white";
 $FRAME_COLOUR = "lightgreen";
 $CONTACTS = 5;
 
+// All measurements in mm 
+$BOLT_DIA = 3;
+$BOLT_TAP_DRILL_DIA = 2.5;
+$BOLT_HOLE_PRINT_TOLERANCE_DIA = 0.3;
+$BOLT_COUNTERSINK_DIA = 6;
+$BOLT_COUNTERSINK_DEPTH = 3;
+
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
     translate([-$thickness_padding/2,-25-$y_padding,-25]) color($FRAME_COLOUR) cube([$pcb_thickness+$thickness_padding,50+($y_padding*2),50]);
 }
@@ -22,8 +29,8 @@ module cubeCap() {
             polygon(points=[[-20,25],[20,25],[25,20],[25,-20],[20,-25],[-20,-25],[-25,-20],[-25,20]]);
             for (i=[0, 90, 180, 270]) rotate(i) {
                 translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,1);
-                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=3.3,h=12,$fn=36);
-                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=6,h=3,$fn=36);
+                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=12,$fn=36);
+                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_COUNTERSINK_DIA,h=$BOLT_COUNTERSINK_DEPTH,$fn=36);
             }      
         }    
     }
@@ -43,7 +50,7 @@ module cubeStandoffs() {
         }
         for (i=[0, 90, 180, 270]) rotate(i) {
             translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,0.5);
-            translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=3,h=42,$fn=36);
+            translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=$BOLT_TAP_DRILL_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=42,$fn=36);
         }
     }
 }
