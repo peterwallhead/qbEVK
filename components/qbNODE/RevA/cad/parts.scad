@@ -1,11 +1,12 @@
 $PCB_THICKNESS = 1.2;
-$PCB_COLOUR = "white";
-$FRAME_COLOUR = "lightgreen";
+$PCB_COLOUR = "green";
+$FRAME_COLOUR = "white";
+$FRAME_COLOUR_TRANSPARENCY = 0.9;
 $CONTACTS = 5;
 
 // All measurements in mm 
 $BOLT_DIA = 3;
-$BOLT_TAP_DRILL_DIA = 2.5;
+$BOLT_TAP_DRILL_DIA = 2.7;
 $BOLT_HOLE_PRINT_TOLERANCE_DIA = 0.3;
 $BOLT_COUNTERSINK_DIA = 6;
 $BOLT_COUNTERSINK_DEPTH = 3;
@@ -21,7 +22,7 @@ module pcb($pcb_thickness) {
 
 module cubeCap() {
     difference() {
-        translate([0,0,0]) color($FRAME_COLOUR) linear_extrude(height=10, twist=0)
+        translate([0,0,0]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) linear_extrude(height=10, twist=0)
         polygon(points=[[-30,32.5],[30,32.5],[32.5,30],[32.5,20],[32.5,-20],[32.5,-30],[30,-32.5],[-30,-32.5],[-32.5,-30],[-32.5,-20],[-32.5,20],[-32.5,30]]);
         
         union() {
@@ -37,16 +38,16 @@ module cubeCap() {
 }
 
 module qbNODE() {
-    translate([0,0,60]) rotate([0,180,0]) cubeCap(); // top
-    cubeStandoffs();
     cubeHardware();
+    cubeStandoffs();
+    translate([0,0,60]) rotate([0,180,0]) cubeCap(); // top
     cubeCap(); // bottom   
 }
 
 module cubeStandoffs() {
     difference() {
         for (i=[0, 90, 180, 270]) rotate(i) {
-            translate([-26.5,-26.5,10]) color($FRAME_COLOUR) cylinder(d=10,h=40,$fn=36);       
+            translate([-26.5,-26.5,10]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) cylinder(d=10,h=40,$fn=36);       
         }
         for (i=[0, 90, 180, 270]) rotate(i) {
             translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,0.5);
