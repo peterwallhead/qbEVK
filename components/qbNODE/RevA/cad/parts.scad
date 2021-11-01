@@ -12,6 +12,8 @@ $BOLT_COUNTERSINK_DIA = 6;
 $BOLT_COUNTERSINK_DEPTH = 3;
 $EMBEDDED_NUT_CUTOUT_WIDTH = 6.75;
 $EMBEDDED_NUT_CUTOUT_HEIGHT = 3;
+$ENDCAP_PCB_LENGTH_TOLERANCE = 0.5;
+$STANDOFF_PCB_CUTOUT_TOLERANCE = 0.5;
 
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
     translate([-$thickness_padding/2,-25-$y_padding,-25]) color($FRAME_COLOUR) cube([$pcb_thickness+$thickness_padding,50+($y_padding*2),50]);
@@ -31,7 +33,7 @@ module cubeCap() {
             translate([0,0,-1]) color($FRAME_COLOUR) linear_extrude(height=12, twist=0)
             polygon(points=[[-20,25],[20,25],[25,20],[25,-20],[20,-25],[-20,-25],[-25,-20],[-25,20]]);
             for (i=[0, 90, 180, 270]) rotate(i) {
-                translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,1);
+                translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,$ENDCAP_PCB_LENGTH_TOLERANCE);
                 translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=12,$fn=36);
                 translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_COUNTERSINK_DIA,h=$BOLT_COUNTERSINK_DEPTH,$fn=36);
             }      
@@ -52,7 +54,7 @@ module cubeStandoffs() {
             translate([-26.5,-26.5,10]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) cylinder(d=10,h=40,$fn=36);       
         }
         for (i=[0, 90, 180, 270]) rotate(i) {
-            translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,0.5);
+            translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,$STANDOFF_PCB_CUTOUT_TOLERANCE);
             translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=42,$fn=36);
             translate([26,26,13]) union() {
                 translate([0,0,0]) rotate([0,0,15]) color($FRAME_COLOUR) cylinder(d=$EMBEDDED_NUT_CUTOUT_WIDTH,h=$EMBEDDED_NUT_CUTOUT_HEIGHT,$fn=6);
