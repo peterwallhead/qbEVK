@@ -10,6 +10,8 @@ $BOLT_TAP_DRILL_DIA = 2.7;
 $BOLT_HOLE_PRINT_TOLERANCE_DIA = 0.3;
 $BOLT_COUNTERSINK_DIA = 6;
 $BOLT_COUNTERSINK_DEPTH = 3;
+$EMBEDDED_NUT_CUTOUT_WIDTH = 6.75;
+$EMBEDDED_NUT_CUTOUT_HEIGHT = 3;
 
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
     translate([-$thickness_padding/2,-25-$y_padding,-25]) color($FRAME_COLOUR) cube([$pcb_thickness+$thickness_padding,50+($y_padding*2),50]);
@@ -52,8 +54,16 @@ module cubeStandoffs() {
         for (i=[0, 90, 180, 270]) rotate(i) {
             translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,0.5);
             translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=$BOLT_TAP_DRILL_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=42,$fn=36);
+            translate([26,26,13]) union() {
+                translate([0,0,0]) rotate([0,0,15]) color($FRAME_COLOUR) cylinder(d=$EMBEDDED_NUT_CUTOUT_WIDTH,h=$EMBEDDED_NUT_CUTOUT_HEIGHT,$fn=6);
+                translate([-2,-2,$EMBEDDED_NUT_CUTOUT_HEIGHT/2]) rotate([0,0,45]) color($FRAME_COLOUR) cube([6,6.75,$EMBEDDED_NUT_CUTOUT_HEIGHT],true);
+            }
+            translate([26,26,44]) union() {
+                translate([0,0,0]) rotate([0,0,15]) color($FRAME_COLOUR) cylinder(d=$EMBEDDED_NUT_CUTOUT_WIDTH,h=$EMBEDDED_NUT_CUTOUT_HEIGHT,$fn=6);
+                translate([-2,-2,$EMBEDDED_NUT_CUTOUT_HEIGHT/2]) rotate([0,0,45]) color($FRAME_COLOUR) cube([6,6.75,$EMBEDDED_NUT_CUTOUT_HEIGHT],true);
+            }
         }
-    }
+    }   
 }
 
 module cubeHardware() {
