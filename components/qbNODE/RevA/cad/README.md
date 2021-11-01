@@ -1,7 +1,7 @@
 # 3D Printing Notes
 All tolerances were set for the most accurate print on a specific Flashforge Adventurer 3. Your mileage may vary.
 
-## [end-cap.stl](components/qbNODE/RevA/cad/exports/end-cap.stl)
+## [end-cap.stl](https://github.com/peterwallhead/qbEVK/blob/master/components/qbNODE/RevA/cad/exports/end-cap.stl)
 
 Designed to be printed with the bolt head countersinks flat against the bed with minimal support material.
 
@@ -15,7 +15,7 @@ Supports | Yes
 Brim (optional based on printer used) | Yes (5mm margin)
 Raft (optional based on printer used) | No
 
-## [corner-piller.stl](components/qbNODE/RevA/cad/exports/corner-piller.stl)
+## [corner-piller.stl](https://github.com/peterwallhead/qbEVK/blob/master/components/qbNODE/RevA/cad/exports/corner-pillar.stl)
 
 Can be printed orientated as per the STL file, or rotated so that one side of the qbEDGE PCB cutout sits against the bed.
 
