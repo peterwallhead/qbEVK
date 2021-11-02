@@ -17,14 +17,14 @@ Raft (optional based on printer used) | No
 
 ## [corner-piller.stl](https://github.com/peterwallhead/qbEVK/blob/master/components/qbNODE/RevA/cad/exports/corner-pillar.stl)
 
-Can be printed orientated as per the STL file, or rotated so that one side of the qbEDGE PCB cutout sits against the bed.
+Can be printed orientated as per the STL file, or rotated onto its side so that the embedded nut cutouts are facing up.
 
 Print setting | Value
 ------------ | -------------
 Extruder temperature | 200℃
 Bed temperature | 60℃
 Material | Flashforge Green PLA (test prints)
-Infill | 0%
-Supports | No (when printed on one side)
+Infill | 15%
+Supports | Yes
 Brim | No
 Raft | Yes
