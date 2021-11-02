@@ -42,17 +42,17 @@ module cubeCap() {
 }
 
 module qbNODE() {
-    //cubeHardware();
-    //cubeStandoffs();
-    //translate([0,0,60]) rotate([0,180,0]) cubeCap(); // top
+    cubeHardware();
+    cubeStandoffs();
+    translate([0,0,60]) rotate([0,180,0]) cubeCap(); // top
     cubeCap(); // bottom   
 }
 
 module cubeStandoffs() {
     difference() {
-        //for (i=[0, 90, 180, 270]) rotate(i) {
+        for (i=[0, 90, 180, 270]) rotate(i) {
             translate([-26.5,-26.5,10]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) cylinder(d=9,h=40,$fn=36);       
-        //}
+        }
         for (i=[0, 90, 180, 270]) rotate(i) {
             translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,$STANDOFF_PCB_CUTOUT_TOLERANCE);
             translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=42,$fn=36);
