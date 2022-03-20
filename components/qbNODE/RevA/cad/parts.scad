@@ -91,9 +91,39 @@ module mountingContacts($pins) {
     }
 }
 
+module jigClamp() {
+    color("white") difference() {
+        union() {
+            translate([0,0,0]) linear_extrude(height=8, twist=0)
+                polygon(points=[[5,0],[12.5,0],[12.5,-10],[-5,-10],[-10,-5],[-10,12.5],[0,12.5],[0,5]]);
+
+            translate([12.5,-5,0]) cylinder(d=10,h=8,$fn=360);
+            translate([-5,12.5,0]) cylinder(d=10,h=8,$fn=360);
+            translate([-5,-5,0]) cylinder(d=10,h=8,$fn=360);
+        }
+        
+        union() {
+            //Bolt holes
+            translate([12.5,-5,-1]) cylinder(d=3.2,h=10,$fn=36);
+            translate([-5,12.5,-1]) cylinder(d=3.2,h=10,$fn=36);
+            translate([-5,-5,-1]) cylinder(d=3.2,h=10,$fn=36);
+            
+            //Countersinks
+            translate([12.5,-5,5]) cylinder(d=6,h=5,$fn=36);
+            translate([-5,12.5,5]) cylinder(d=6,h=5,$fn=36);
+            translate([-5,-5,5]) cylinder(d=6,h=5,$fn=36);
+            translate([3.75,3.75,-1]) cylinder(d=12,h=10,$fn=360);
+            
+        }
+    }
+    
+    
+}
+
 // Uncomment to render mockup images of complete node
 qbNODE();
 
 // Uncomment to generate STL exports
 //translate([0,25,-40]) rotate([90,45,0]) cubeStandoff();
 //cubeCap();
+//jigClamp();
