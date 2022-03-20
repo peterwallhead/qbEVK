@@ -1,18 +1,14 @@
 $PCB_THICKNESS = 1.2;
 $PCB_COLOUR = "green";
-$FRAME_COLOUR = "white";
+$SCREEN_PRINT_COLOUR = "white"; 
+$FRAME_COLOUR = "black";
 $FRAME_COLOUR_TRANSPARENCY = 0.9;
 $CONTACTS = 5;
 
 // All measurements in mm 
 $BOLT_DIA = 3;
-$BOLT_TAP_DRILL_DIA = 2.7; // Only required when not using embedded nuts in the pillers
 $BOLT_HOLE_PRINT_TOLERANCE_DIA = 0.5;
-$BOLT_COUNTERSINK_DIA = 6;
-$BOLT_COUNTERSINK_DEPTH = 3;
-$EMBEDDED_NUT_CUTOUT_WIDTH = 7.5;
-$EMBEDDED_NUT_CUTOUT_HEIGHT = 3;
-$ENDCAP_PCB_LENGTH_TOLERANCE = 0.5;
+$ENDCAP_PCB_LENGTH_TOLERANCE = 0.25;
 $STANDOFF_PCB_CUTOUT_TOLERANCE = 0.5;
 
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
@@ -21,21 +17,21 @@ module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
 
 module pcb($pcb_thickness) {
    translate([0,-25,-25]) color($PCB_COLOUR) cube([$pcb_thickness,50,50]);
+   translate([-30,-30.25,0]) rotate([90,0,0]) color($SCREEN_PRINT_COLOUR) linear_extrude(height=1, twist=0) text("qbEVK", size=1.5, halign="center");
 }
 
 
 module cubeCap() {
     difference() {
         translate([0,0,0]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) linear_extrude(height=10, twist=0)
-        polygon(points=[[-30,32.5],[30,32.5],[32.5,30],[32.5,20],[32.5,-20],[32.5,-30],[30,-32.5],[-30,-32.5],[-32.5,-30],[-32.5,-20],[-32.5,20],[-32.5,30]]);
+        polygon(points=[[-25,32.5],[25,32.5],[32.5,25],[32.5,20],[32.5,-20],[32.5,-25],[25,-32.5],[-25,-32.5],[-32.5,-25],[-32.5,-20],[-32.5,20],[-32.5,25]]);
         
         union() {
             translate([0,0,-1]) color($FRAME_COLOUR) linear_extrude(height=12, twist=0)
             polygon(points=[[-20,25],[20,25],[25,20],[25,-20],[20,-25],[-20,-25],[-25,-20],[-25,20]]);
             for (i=[0, 90, 180, 270]) rotate(i) {
                 translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,$ENDCAP_PCB_LENGTH_TOLERANCE);
-                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=12,$fn=36);
-                translate([-26,26,-1]) color($FRAME_COLOUR) cylinder(d=$BOLT_COUNTERSINK_DIA,h=$BOLT_COUNTERSINK_DEPTH,$fn=36);
+                translate([-32,32,5]) rotate([90,0,45]) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=15,$fn=36);
             }      
         }    
     }
@@ -48,23 +44,21 @@ module qbNODE() {
     cubeCap(); // bottom   
 }
 
-module cubeStandoffs() {
+module cubeStandoff() {
     difference() {
-        for (i=[0, 90, 180, 270]) rotate(i) {
-            translate([-26.5,-26.5,10]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) cylinder(d=9,h=40,$fn=36);       
+        translate([-25,32.5,0]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) linear_extrude(height=60, twist=0)
+        polygon(points=[[0,0],[-2.5,0],[-7.5,-5],[-7.5,-7.55]]);
+        
+        union() {
+            translate([-32,32,5]) rotate([90,0,45]) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=15,$fn=36);
+            translate([-32,32,55]) rotate([90,0,45]) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=15,$fn=36);
         }
-        for (i=[0, 90, 180, 270]) rotate(i) {
-            translate([30,0,30]) pcbSubtraction($PCB_THICKNESS,0.5,$STANDOFF_PCB_CUTOUT_TOLERANCE);
-            translate([-26,26,9]) color($FRAME_COLOUR) cylinder(d=$BOLT_DIA+$BOLT_HOLE_PRINT_TOLERANCE_DIA,h=42,$fn=36);
-            translate([26,26,13]) union() {
-                translate([0,0,0]) rotate([0,0,15]) color($FRAME_COLOUR) cylinder(d=$EMBEDDED_NUT_CUTOUT_WIDTH,h=$EMBEDDED_NUT_CUTOUT_HEIGHT,$fn=6);
-                translate([-2,-2,$EMBEDDED_NUT_CUTOUT_HEIGHT/2]) rotate([0,0,45]) color($FRAME_COLOUR) cube([6,$EMBEDDED_NUT_CUTOUT_WIDTH,$EMBEDDED_NUT_CUTOUT_HEIGHT],true);
-            }
-            translate([26,26,44]) union() {
-                translate([0,0,0]) rotate([0,0,15]) color($FRAME_COLOUR) cylinder(d=$EMBEDDED_NUT_CUTOUT_WIDTH,h=$EMBEDDED_NUT_CUTOUT_HEIGHT,$fn=6);
-                translate([-2,-2,$EMBEDDED_NUT_CUTOUT_HEIGHT/2]) rotate([0,0,45]) color($FRAME_COLOUR) cube([6,$EMBEDDED_NUT_CUTOUT_WIDTH,$EMBEDDED_NUT_CUTOUT_HEIGHT],true);
-            }
-        }
+    }
+}
+
+module cubeStandoffs() {
+    for (i=[0,90,180,270]) rotate(i) {
+        cubeStandoff();
     }
 }
 
@@ -82,7 +76,7 @@ module mountingPads($pins) {
         for (i=[0:$pins-1])  {
             color("gold") translate([0.02,i*(0.5+2),0]) cube([0.1,2,7]);
         }
-        color("white") translate([0.01,-.25,0]) cube([0.1,$pins*2.5,7]);
+        color($PCB_COLOUR) translate([0.01,-.25,0]) cube([0.1,$pins*2.5,7]);
     }
 }
 
@@ -97,4 +91,9 @@ module mountingContacts($pins) {
     }
 }
 
+// Uncomment to render mockup images of complete node
 qbNODE();
+
+// Uncomment to generate STL exports
+//translate([0,25,-40]) rotate([90,45,0]) cubeStandoff();
+//cubeCap();
