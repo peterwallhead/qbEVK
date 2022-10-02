@@ -1,8 +1,8 @@
 $PCB_THICKNESS = 1.2;
-$PCB_COLOUR = "green";
+$PCB_COLOUR = "purple";
 $SCREEN_PRINT_COLOUR = "white"; 
 $FRAME_COLOUR = "black";
-$FRAME_COLOUR_TRANSPARENCY = 0.9;
+$FRAME_COLOUR_TRANSPARENCY = 1;
 $CONTACTS = 5;
 
 // All measurements in mm 
@@ -39,12 +39,12 @@ module cubeCap() {
 
 module qbNODE() {
     cubeHardware();
-    cubeStandoffs();
+    cubeCornerCovers();
     translate([0,0,60]) rotate([0,180,0]) cubeCap(); // top
     cubeCap(); // bottom   
 }
 
-module cubeStandoff() {
+module cubeCornerCover() {
     difference() {
         translate([-25,32.5,0]) color($FRAME_COLOUR,$FRAME_COLOUR_TRANSPARENCY) linear_extrude(height=60, twist=0)
         polygon(points=[[0,0],[-2.5,0],[-7.5,-5],[-7.5,-7.55]]);
@@ -56,9 +56,9 @@ module cubeStandoff() {
     }
 }
 
-module cubeStandoffs() {
+module cubeCornerCovers() {
     for (i=[0,90,180,270]) rotate(i) {
-        cubeStandoff();
+        cubeCornerCover();
     }
 }
 
@@ -124,6 +124,6 @@ module jigClamp() {
 qbNODE();
 
 // Uncomment to generate STL exports
-//translate([0,25,-40]) rotate([90,45,0]) cubeStandoff();
+//translate([0,25,-40]) rotate([90,45,0]) cubeCornerCover();
 //cubeCap();
 //jigClamp();
