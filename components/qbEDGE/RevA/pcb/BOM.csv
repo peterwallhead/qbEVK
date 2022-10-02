@@ -1,0 +1,22 @@
+Reference, Quantity, Value, Footprint, Datasheet, Mouser Part Number, Arrow Part Number, Arrow Price/Stock, Description, Height, Manufacturer_Name, Manufacturer_Part_Number, Mouser Price/Stock
+C1 ,1,100 uF,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,~,810-C3216X5R1A107M,,,,,,,
+C2 ,1,1 uF,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,~,77-VJ1206Y105MXQRBC,,,,,,,
+C3 C4 ,2,10 uF,Capacitor_Tantalum_SMD:CP_EIA-3216-10_Kemet-I_Pad1.58x1.35mm_HandSolder,~,80-T491A106K016,,,,,,,
+D1 ,1,GREEN LED,LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder,~,710-150120GS75000,,,,,,,
+D2 ,1,RED LED,LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder,~,710-150120SS75000,,,,,,,
+IC1 ,1,LT1117IST-3.3#PBF,LT1117IST-3.3#PBF:SOT230P700X180-4N,https://www.analog.com/media/en/technical-documentation/data-sheets/1117fd.pdf,584-LT1117IST-3.3PBF,LT1117IST-3.3#PBF,https://www.arrow.com/en/products/lt1117ist-3.3pbf/analog-devices,LDO Voltage Regulators 3.3V Low Dropout Regulator,1.8,Analog Devices,LT1117IST-3.3#PBF,https://www.mouser.co.uk/ProductDetail/Analog-Devices/LT1117IST-33PBF?qs=ytflclh7QUW4uyPceOhEsg%3D%3D
+J1 ,1,Conn_01x10_Female,Connector_Custom:70AAJ-5-M0G,~,652-70AAJ-5-M0G,,,,,,,
+J2 ,1,Conn_01x5_Female,Connector_Custom:70AAJ-5-M0G-MATING-PADS,~,,,,,,,,
+J3 ,1,TTL PROG,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,~,,,,,,,,
+J4 ,1,BOOT,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,~,,,,,,,,
+JP1 ,1,RESET,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm,~,,,,,,,,
+R1 ,1,10K Ohms,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,~,652-CR1206JW-103ELF,,,,,,,
+R2 R4 ,2,150 Ohms,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,~,667-ERJ-8ENF1500V,,,,,,,
+R3 ,1,120 Ohms,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,~,71-CRCW1206120RFKEAH,,,,,,,
+S1 ,1,FUNC,DTS-61N-V:DTS61NV,https://componentsearchengine.com/Datasheets/1/DTS-61N-V.pdf,113-DTS-61N-V,,,Tactile Switches Through Hole 6*6,4.3,Diptronics,DTS-61N-V,https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-61N-V?qs=gTYE2QTfZfTZTPABWXJbEQ%3D%3D
+TP1 TP3 TP5 ,3,VIN,TestPoint:TestPoint_Pad_D2.0mm,~,,,,,,,,
+TP2 TP4 TP6 ,3,GND,TestPoint:TestPoint_Pad_D2.0mm,~,,,,,,,,
+TP7 TP9 ,2,A,TestPoint:TestPoint_Pad_D2.0mm,~,,,,,,,,
+TP8 TP10 ,2,B,TestPoint:TestPoint_Pad_D2.0mm,~,,,,,,,,
+U1 ,1,ESP32-WROOM-32,RF_Module:ESP32-WROOM-32,https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf,356-ESPWROOM3200US3,,,,,,,
+U2 ,1,MAX3485,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,https://datasheets.maximintegrated.com/en/ds/MAX3483-MAX3491.pdf,700-MAX3485ESAT,,,,,,,
