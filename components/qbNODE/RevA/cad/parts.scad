@@ -1,14 +1,14 @@
-$PCB_THICKNESS = 1.2;
+$PCB_THICKNESS = 1.3;
 $PCB_COLOUR = "purple";
 $SCREEN_PRINT_COLOUR = "white"; 
-$FRAME_COLOUR = "black";
+$FRAME_COLOUR = "lightblue";
 $FRAME_COLOUR_TRANSPARENCY = 1;
 $CONTACTS = 5;
 
 // All measurements in mm 
 $BOLT_DIA = 3;
 $BOLT_HOLE_PRINT_TOLERANCE_DIA = 0.5;
-$ENDCAP_PCB_LENGTH_TOLERANCE = 0.25;
+$ENDCAP_PCB_LENGTH_TOLERANCE = 0.4;
 $STANDOFF_PCB_CUTOUT_TOLERANCE = 0.5;
 
 module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
@@ -18,6 +18,7 @@ module pcbSubtraction($pcb_thickness,$thickness_padding,$y_padding) {
 module pcb($pcb_thickness) {
    translate([0,-25,-25]) color($PCB_COLOUR) cube([$pcb_thickness,50,50]);
    translate([-30,-30.25,0]) rotate([90,0,0]) color($SCREEN_PRINT_COLOUR) linear_extrude(height=1, twist=0) text("qbEVK", size=1.5, halign="center");
+   translate([0.31,-2,0]) rotate([90,0,90]) color($SCREEN_PRINT_COLOUR) linear_extrude(1) text("qbEVK", size=1);
 }
 
 
@@ -122,6 +123,9 @@ module jigClamp() {
 
 // Uncomment to render mockup images of complete node
 qbNODE();
+//translate([70,0,0]) qbNODE();
+//translate([70,70,0]) qbNODE();
+//translate([0,70,0]) qbNODE();
 
 // Uncomment to generate STL exports
 //translate([0,25,-40]) rotate([90,45,0]) cubeCornerCover();
