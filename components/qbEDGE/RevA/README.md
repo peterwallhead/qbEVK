@@ -20,6 +20,26 @@ IO25 | Pin 5 on J1 | Read from left to right. Best used as an output pin. Writes
 IO23 | Pin 1 on J2 | Read from left to right. Best used as an input pin. Reads from pin 5 on J1 of a connected qbEDGE
 IO22 | Pin 2 on J2 | Read from left to right. Best used as an input pin. Reads from Pin 4 on J1 of a connected qbEDGE
 
+## J1 Connection Guide
+__Read from left to right.__
+Pin | Connected to | Notes
+------------ | ------------- | -------------
+1 | GND | Ground
+2 | RS485 A | RS485 differential pair A
+3 | RS485 B | RS485 differential pair B
+4 | IO26 | Best used as an output pin. Writes to pin 2 on J2 of a connected qbEDGE
+5 | IO25 | Best used as an output pin. Writes to pin 1 on J2 of a connected qbEDGE
+
+## J2 Connection Guide
+__Read from left to right.__
+Pin | Connected to | Notes
+------------ | ------------- | -------------
+1 | IO23 | Best used as an input pin. Reads from pin 5 on J1 of a connected qbEDGE
+2 | IO22 | Best used as an input pin. Reads from Pin 4 on J1 of a connected qbEDGE
+3 | RS485 B | RS485 differential pair B
+4 | RS485 A | RS485 differential pair A
+5 | GND | Ground
+
 ## Programming quick start
 
 ### Parts required
